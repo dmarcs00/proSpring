@@ -20,4 +20,9 @@ public class SerieService extends GenericServiceImpl<Serie, Integer> {
 	 * La utilidad de esto es que puedes implementar los metodos personaalizados del repositorio
 	 * Tambien puedes realizar algunas comprobaciones antes de crear un registro, etc.
 	 */
+	/*
+	 * TODO:
+	 * Implementar la logica de negocio para el lunes.
+	 */
+	
 }
