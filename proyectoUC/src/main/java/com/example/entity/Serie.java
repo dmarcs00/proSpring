@@ -13,11 +13,33 @@ import org.springframework.data.annotation.Id;
 public class Serie {
 	@Id
 	private Integer numero_serie;
+	private String nombre_serie;
 	private String descripcion;
 	private List<Temporada> temporadas = new ArrayList<>();
 	private Categoria categoria; //duda de como aplicar la herencia y los precios
 
-    public Categoria getCategoria() {
+	
+	
+	public Serie(Integer numero_serie, String nombre_serie, String descripcion, List<Temporada> temporadas,
+			Categoria categoria) {
+		this.numero_serie = numero_serie;
+		this.nombre_serie = nombre_serie;
+		this.descripcion = descripcion;
+		this.temporadas = temporadas;
+		this.categoria = categoria;
+	}
+
+	public Serie() {}
+	
+    public String getNombre_serie() {
+		return nombre_serie;
+	}
+
+	public void setNombre_serie(String nombre_serie) {
+		this.nombre_serie = nombre_serie;
+	}
+
+	public Categoria getCategoria() {
 		return categoria;
 	}
 	public void setCategoria(Categoria categoria) {
@@ -27,7 +49,8 @@ public class Serie {
     public List<Temporada> getPedidos() {
         return temporadas;
     }
-    public void setTemporada(List<Temporada> temporadas) {
+    
+	public void setTemporada(List<Temporada> temporadas) {
     	this.temporadas = temporadas;
     }
 	public int getNumero_serie() {
