@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,9 @@ import com.example.service.common.GenericServiceImpl;
 @Service
 public class SerieService extends GenericServiceImpl<Serie, Integer> {
 
+	@Autowired
 	SerieRepository repository;
+	
 	@Override
 	public JpaRepository<Serie, Integer> getRepository() {
 		// TODO Auto-generated method stub
