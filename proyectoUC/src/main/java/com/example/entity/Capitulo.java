@@ -2,8 +2,11 @@ package com.example.entity;
 
 import java.util.Objects;
 
+import javax.persistence.Id;
+
 public class Capitulo {
 	
+	@Id
 	private Integer numero_capitulo;
 	private String titulo;
 	private String enlace;

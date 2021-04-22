@@ -3,9 +3,14 @@ package com.example.entity;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 @Entity
 public class Creador {
-
+	
+	@Id
+	@GeneratedValue
+	private Integer id;
 	private String nombre;
 	private String apellidos;
 	

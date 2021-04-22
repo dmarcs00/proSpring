@@ -5,19 +5,27 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.data.annotation.Id;
 
 @Entity
 public class Serie {
 	@Id
+	@GeneratedValue
 	private Integer numero_serie;
 	private String nombre_serie;
 	private String descripcion;
+	private Categoria categoria;
+	@OneToMany(mappedBy = "Serie")
 	private List<Temporada> temporadas = new ArrayList<>();
-	private Categoria categoria; //duda de como aplicar la herencia y los precios
-
+	@ManyToMany
+	private List<Actor> actores = new ArrayList<>();
+	@ManyToMany
+	private List<Creador> creadores = new ArrayList<>();
 	
 	
 	public Serie(Integer numero_serie, String nombre_serie, String descripcion, List<Temporada> temporadas,
@@ -45,8 +53,8 @@ public class Serie {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	@OneToMany(mappedBy = "Serie")
-    public List<Temporada> getPedidos() {
+	
+    public List<Temporada> getTemporadas() {
         return temporadas;
     }
     
@@ -67,6 +75,22 @@ public class Serie {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public List<Actor> getActores() {
+		return actores;
+	}
+
+	public void setActores(List<Actor> actores) {
+		this.actores = actores;
+	}
+
+	public List<Creador> getCreadores() {
+		return creadores;
+	}
+
+	public void setCreadores(List<Creador> creadores) {
+		this.creadores = creadores;
 	}
 
 	@Override

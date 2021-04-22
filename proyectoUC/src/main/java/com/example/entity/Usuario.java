@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -13,12 +14,16 @@ public class Usuario {
 	private String password;
 	private String IBAN;
 	private boolean es_VIP;
+	@ManyToMany
 	private List<Serie> series_pendientes = new ArrayList<>();
-	private List<Serie> series_vistas = new ArrayList<>();
-	private List<Serie> series_empezadas = new ArrayList<>();
+	@ManyToMany
+	private List<Serie> series_finalizadas = new ArrayList<>();
+	@ManyToMany
+	private List<SeriesVisualizada> series_empezadas = new ArrayList<>();
+	@OneToMany(mappedBy = "Usuario")
 	private List<Factura> facturas = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "Usuario")
+	
     public List<Factura> getFactura() {
         return facturas;
     }

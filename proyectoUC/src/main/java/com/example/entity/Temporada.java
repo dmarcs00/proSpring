@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.Id;
@@ -13,12 +14,13 @@ import org.springframework.data.annotation.Id;
 public class Temporada {
 	
 	@Id
+	@GeneratedValue
 	private int numero_temporada;
-	
+	@OneToMany(mappedBy = "Temporada")
 	private List<Temporada> capitulos = new ArrayList<>();
 
-	@OneToMany(mappedBy = "Temporada")
-    public List<Temporada> getPedidos() {
+	
+    public List<Temporada> getCapitulos() {
         return this.capitulos;
     }
     public void setTemporada(List<Temporada> temporadas) {
