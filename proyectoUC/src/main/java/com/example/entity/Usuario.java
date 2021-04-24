@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+
 
 @Entity
 public class Usuario {
 	
+	@Id
 	private String usuarioId;
 	private String password;
 	private String IBAN;
@@ -28,21 +32,15 @@ public class Usuario {
 		
 	}
 	
-	public Usuario(String usuarioId, String password, String iBAN, boolean es_VIP, List<Serie> series_pendientes,
-			List<Serie> series_finalizadas, List<SeriesVisualizada> series_empezadas, List<Factura> facturas) {
+    public Usuario(String usuarioId, String password, String iBAN, boolean es_VIP) {
 		super();
 		this.usuarioId = usuarioId;
 		this.password = password;
 		IBAN = iBAN;
 		this.es_VIP = es_VIP;
-		this.series_pendientes = series_pendientes;
-		this.series_finalizadas = series_finalizadas;
-		this.series_empezadas = series_empezadas;
-		this.facturas = facturas;
 	}
 
-	
-    public List<Factura> getFactura() {
+	public List<Factura> getFactura() {
         return facturas;
     }
 	

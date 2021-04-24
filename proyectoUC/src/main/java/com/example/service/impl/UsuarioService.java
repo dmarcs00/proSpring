@@ -9,13 +9,13 @@ import com.example.repository.UsuarioRepository;
 import com.example.service.common.GenericServiceImpl;
 
 @Service
-public class UsuarioService extends GenericServiceImpl<Usuario, Integer> {
+public class UsuarioService extends GenericServiceImpl<Usuario, String> {
 	
 	@Autowired
 	UsuarioRepository repository;
 	
 	@Override
-	public JpaRepository<Usuario, Integer> getRepository() {
+	public UsuarioRepository getRepository() {
 		// TODO Auto-generated method stub
 		return repository;
 	}
