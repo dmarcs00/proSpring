@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToMany;
@@ -19,6 +20,7 @@ public class Serie {
 	private Integer numero_serie;
 	private String nombre_serie;
 	private String descripcion;
+	@Embedded
 	private Categoria categoria;
 	@OneToMany(mappedBy = "Serie")
 	private List<Temporada> temporadas = new ArrayList<>();
@@ -27,19 +29,20 @@ public class Serie {
 	@ManyToMany
 	private List<Creador> creadores = new ArrayList<>();
 	
-	
-	public Serie(Integer numero_serie, String nombre_serie, String descripcion, List<Temporada> temporadas,
-			Categoria categoria) {
+	protected Serie() {
+		
+	}
+
+	//Sin las temporadas. Crear otropara meter temporadas?
+    public Serie(Integer numero_serie, String nombre_serie, String descripcion, Categoria categoria) {
+		super();
 		this.numero_serie = numero_serie;
 		this.nombre_serie = nombre_serie;
 		this.descripcion = descripcion;
-		this.temporadas = temporadas;
 		this.categoria = categoria;
 	}
 
-	public Serie() {}
-	
-    public String getNombre_serie() {
+	public String getNombre_serie() {
 		return nombre_serie;
 	}
 

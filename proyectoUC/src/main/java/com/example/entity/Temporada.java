@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.Id;
@@ -18,7 +19,8 @@ public class Temporada {
 	private int numero_temporada;
 	@OneToMany(mappedBy = "Temporada")
 	private List<Temporada> capitulos = new ArrayList<>();
-
+	@ManyToOne
+	private Serie serie;
 	
     public List<Temporada> getCapitulos() {
         return this.capitulos;
@@ -33,6 +35,9 @@ public class Temporada {
 		this.numero_temporada = numero_temporada;
 	}
 	
+	public Serie getSerie() {
+		return serie;
+	}
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;

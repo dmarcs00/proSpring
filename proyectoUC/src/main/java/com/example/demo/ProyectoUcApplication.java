@@ -8,6 +8,7 @@ public class ProyectoUcApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoUcApplication.class, args);
+		System.out.println("Hola mundo");
 	}
 
 }

@@ -3,6 +3,7 @@ package com.example.entity;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class CargoCapitulo {
@@ -11,6 +12,8 @@ public class CargoCapitulo {
 	private Serie serie;
 	private double precio;
 	private Date fecha;
+	@ManyToOne
+	private Factura factura;
 	
 	public Capitulo getCapitulo() {
 		return capitulo;

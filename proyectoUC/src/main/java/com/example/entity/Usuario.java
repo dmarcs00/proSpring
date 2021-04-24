@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
+	
 	private String usuarioId;
 	private String password;
 	private String IBAN;
@@ -23,6 +24,23 @@ public class Usuario {
 	@OneToMany(mappedBy = "Usuario")
 	private List<Factura> facturas = new ArrayList<>();
 	
+	protected Usuario () {
+		
+	}
+	
+	public Usuario(String usuarioId, String password, String iBAN, boolean es_VIP, List<Serie> series_pendientes,
+			List<Serie> series_finalizadas, List<SeriesVisualizada> series_empezadas, List<Factura> facturas) {
+		super();
+		this.usuarioId = usuarioId;
+		this.password = password;
+		IBAN = iBAN;
+		this.es_VIP = es_VIP;
+		this.series_pendientes = series_pendientes;
+		this.series_finalizadas = series_finalizadas;
+		this.series_empezadas = series_empezadas;
+		this.facturas = facturas;
+	}
+
 	
     public List<Factura> getFactura() {
         return facturas;
@@ -32,7 +50,7 @@ public class Usuario {
 		this.facturas = facturas;
 	}
 	
-	@OneToMany(mappedBy = "Usuario")
+	
     public List<Serie> getSeriesPendientes() {
         return series_pendientes;
     }
@@ -41,21 +59,20 @@ public class Usuario {
 		this.series_pendientes = series_pendientes;
 	}
 	
-	@OneToMany(mappedBy = "Usuario")
-    public List<Serie> getSeriesVistas() {
-        return series_vistas;
+	
+    public List<Serie> getSeriesFinalizadas() {
+        return series_finalizadas;
     }
 	
-	public void setSeriesVistas(List<Serie> series_vistas) {
-		this.series_vistas = series_vistas;
+	public void setSeriesFinalizadas(List<Serie> series_finalizadas) {
+		this.series_finalizadas = series_finalizadas;
 	}
 	
-	@OneToMany(mappedBy = "Usuario")
-    public List<Serie> getSeriesEmpezadas() {
+    public List<SeriesVisualizada> getSeriesEmpezadas() {
         return series_empezadas;
     }
 	
-	public void setSeriesEmpezadas(List<Serie> series_empezadas) {
+	public void setSeriesEmpezadas(List<SeriesVisualizada> series_empezadas) {
 		this.series_empezadas = series_empezadas;
 	}
 	
