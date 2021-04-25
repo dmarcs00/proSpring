@@ -8,15 +8,14 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 @Entity
 public class Factura {
 	@Id
 	private Integer num_factura;
 	private Date fecha_factura;
-	@OneToMany(mappedBy = "Factura")
-	private List<CargoCapitulo> capitulos_vistos_factura = new ArrayList<>(); // todos los capitulos vistos por el usuario
+	@OneToMany(mappedBy = "factura")
+	private List<CargoCapitulo> capitulos_vistos_factura = new ArrayList<>();
 	@ManyToOne
 	private Usuario usuario;
 	
@@ -25,7 +24,7 @@ public class Factura {
 		this.fecha_factura = fecha_factura;
 		this.capitulos_vistos_factura = capitulos_vistos_factura;
 	}
-	
+		
 	public Factura() {}
 	
     public List<CargoCapitulo> getCapitulosVistosFactura() {

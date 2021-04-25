@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -19,13 +20,13 @@ public class Usuario {
 	private String password;
 	private String IBAN;
 	private boolean es_VIP;
-	@ManyToMany
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Serie> series_pendientes = new ArrayList<>();
-	@ManyToMany
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Serie> series_finalizadas = new ArrayList<>();
-	@ManyToMany
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<SeriesVisualizada> series_empezadas = new ArrayList<>();
-	@OneToMany(mappedBy = "Usuario")
+	@OneToMany(mappedBy = "usuario")
 	private List<Factura> facturas = new ArrayList<>();
 	
 	protected Usuario () {
@@ -115,5 +116,12 @@ public class Usuario {
     public int hashCode() {
         return Objects.hash(usuarioId, password, IBAN, es_VIP);
     }
+
+	@Override
+	public String toString() {
+		return "Usuario [usuarioId=" + usuarioId + ", password=" + password + ", IBAN=" + IBAN + ", es_VIP=" + es_VIP
+				+ "]";
+	}
+    
 	
 }

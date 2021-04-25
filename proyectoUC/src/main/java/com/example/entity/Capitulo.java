@@ -2,22 +2,31 @@ package com.example.entity;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Capitulo {
 	
 	@Id
 	@GeneratedValue
-	private Integer numero_capitulo;
-	private String titulo;
-	private String enlace;
-	private String descripcion;
+	protected Integer numero_capitulo;
+	protected String titulo;
+	protected String enlace;
+	protected String descripcion;
 	@ManyToOne
-	private Temporada temporada;
+	protected Temporada temporada;
 	
 	
+	public Capitulo(String titulo, String enlace, String descripcion, Temporada temporada) {
+		super();
+		this.titulo = titulo;
+		this.enlace = enlace;
+		this.descripcion = descripcion;
+		this.temporada = temporada;
+	}
 	public Integer getNumero_capitulo() {
 		return numero_capitulo;
 	}

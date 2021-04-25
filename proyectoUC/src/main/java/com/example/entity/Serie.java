@@ -3,38 +3,47 @@ package com.example.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import org.springframework.data.annotation.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
+
+import com.example.VO.Actor;
+import com.example.VO.Creador;
+
+import javax.persistence.Id;
 
 @Entity
 public class Serie {
 	@Id
 	@GeneratedValue
-	private Integer numero_serie;
+	private int numero_serie;
 	private String nombre_serie;
 	private String descripcion;
-	@Embedded
+	@OneToOne
 	private Categoria categoria;
-	@OneToMany(mappedBy = "Serie")
+	@OneToMany(mappedBy = "serie")
 	private List<Temporada> temporadas = new ArrayList<>();
-	@ManyToMany
+	@Embedded
 	private List<Actor> actores = new ArrayList<>();
-	@ManyToMany
+	@Embedded
 	private List<Creador> creadores = new ArrayList<>();
+	@ManyToOne
+	private Usuario usuario;
 	
 	protected Serie() {
 		
 	}
 
 	//Sin las temporadas. Crear otropara meter temporadas?
-    public Serie(Integer numero_serie, String nombre_serie, String descripcion, Categoria categoria) {
-		super();
-		this.numero_serie = numero_serie;
+    public Serie(String nombre_serie, String descripcion, Categoria categoria) {
+		super();	
 		this.nombre_serie = nombre_serie;
 		this.descripcion = descripcion;
 		this.categoria = categoria;
@@ -48,12 +57,12 @@ public class Serie {
 		this.nombre_serie = nombre_serie;
 	}
 
-	public Categoria getCategoria() {
+	/*public Categoria getCategoria() {
 		return categoria;
 	}
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
+	}*/
 	
     public List<Temporada> getTemporadas() {
         return temporadas;
@@ -108,4 +117,11 @@ public class Serie {
         return Objects.hash(numero_serie, descripcion);
     }
 
+	@Override
+	public String toString() {
+		return "Serie [numero_serie=" + numero_serie + ", nombre_serie=" + nombre_serie + ", descripcion=" + descripcion
+				+ ", categoria=" + categoria + ", temporadas=" + temporadas + ", actores=" + actores + ", creadores="
+				+ creadores + ", usuario=" + usuario + "]";
+	}
+    
 }

@@ -6,27 +6,31 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Temporada {
 	
 	@Id
-	@GeneratedValue
-	private int numero_temporada;
-	@OneToMany(mappedBy = "Temporada")
-	private List<Temporada> capitulos = new ArrayList<>();
+	protected int numero_temporada;
+	@OneToMany(mappedBy = "temporada")
+	protected List<Capitulo> capitulos = new ArrayList<>();
 	@ManyToOne
-	private Serie serie;
+	protected Serie serie;
 	
-    public List<Temporada> getCapitulos() {
+
+	public Temporada(Serie serie) {
+		super();
+		this.serie = serie;
+	}
+	public List<Capitulo> getCapitulos() {
         return this.capitulos;
     }
-    public void setTemporada(List<Temporada> temporadas) {
-    	this.capitulos = temporadas;
+    public void setCapitulos(List<Capitulo> capitulos) {
+    	this.capitulos = capitulos;
     }
 	public int getNumero_temporada() {
 		return numero_temporada;

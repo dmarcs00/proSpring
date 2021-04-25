@@ -1,24 +1,17 @@
-package com.example.entity;
+package com.example.VO;
 
-import java.util.Objects;
+import javax.persistence.Embeddable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-@Entity
+@Embeddable
 public class Creador {
 	
-	@Id
-	@GeneratedValue
-	private Integer id;
 	private String nombre;
 	private String apellidos;
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
+	public Creador(String nombre, String apellidos) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
 	}
 	public String getNombre() {
 		return nombre;
@@ -33,17 +26,4 @@ public class Creador {
 		this.apellidos = apellidos;
 	}
 	
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Creador that = (Creador) o;
-        return	Objects.equals(nombre, that.nombre) &&
-        		Objects.equals(apellidos, that.apellidos);       
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nombre, apellidos);
-    }
 }
