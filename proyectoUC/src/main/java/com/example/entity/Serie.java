@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -23,19 +24,21 @@ import javax.persistence.Id;
 public class Serie {
 	@Id
 	@GeneratedValue
-	private int numero_serie;
-	private String nombre_serie;
-	private String descripcion;
-	@OneToOne
-	private Categoria categoria;
-	@OneToMany(mappedBy = "serie")
-	private List<Temporada> temporadas = new ArrayList<>();
-	@Embedded
-	private List<Actor> actores = new ArrayList<>();
-	@Embedded
-	private List<Creador> creadores = new ArrayList<>();
+	protected int numero_serie;
+	protected String nombre_serie;
+	protected String descripcion;
+	@OneToOne(cascade = CascadeType.ALL)
+	protected Categoria categoria;
+	@OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+	protected List<Temporada> temporadas = new ArrayList<>();
+	@ElementCollection
+	@OrderColumn(name="actores")
+	protected List<Actor> actores = new ArrayList<>();
+	@ElementCollection
+	@OrderColumn(name="creadores")
+	protected List<Creador> creadores = new ArrayList<>();
 	@ManyToOne
-	private Usuario usuario;
+	protected Usuario usuario;
 	
 	protected Serie() {
 		

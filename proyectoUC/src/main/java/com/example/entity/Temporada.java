@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,8 +16,9 @@ import javax.persistence.OneToMany;
 public class Temporada {
 	
 	@Id
+	@GeneratedValue
 	protected int numero_temporada;
-	@OneToMany(mappedBy = "temporada")
+	@OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
 	protected List<Capitulo> capitulos = new ArrayList<>();
 	@ManyToOne
 	protected Serie serie;

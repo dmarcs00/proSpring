@@ -7,9 +7,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Actor {
 	
-	private String nombre;
-	private String apellidos;
+	protected String nombre;
+	protected String apellidos;
 	
+	protected Actor() {
+		
+	}
 	public Actor(String nombre, String apellidos) {
 		super();
 		this.nombre = nombre;

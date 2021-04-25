@@ -5,9 +5,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Creador {
 	
-	private String nombre;
-	private String apellidos;
+	protected String nombre;
+	protected String apellidos;
 	
+	protected Creador() {
+		
+	}
 	public Creador(String nombre, String apellidos) {
 		super();
 		this.nombre = nombre;
