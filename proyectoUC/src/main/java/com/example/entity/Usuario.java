@@ -20,9 +20,9 @@ public class Usuario {
 	private String password;
 	private String IBAN;
 	private boolean es_VIP;
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@ManyToMany
 	private List<Serie> series_pendientes = new ArrayList<>();
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@ManyToMany
 	private List<Serie> series_finalizadas = new ArrayList<>();
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<SeriesVisualizada> series_empezadas = new ArrayList<>();

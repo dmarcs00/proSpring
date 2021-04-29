@@ -37,8 +37,6 @@ public class Serie {
 	@ElementCollection
 	@OrderColumn(name="creadores")
 	protected List<Creador> creadores = new ArrayList<>();
-	@ManyToOne
-	protected Usuario usuario;
 	
 	protected Serie() {
 		
@@ -124,7 +122,7 @@ public class Serie {
 	public String toString() {
 		return "Serie [numero_serie=" + numero_serie + ", nombre_serie=" + nombre_serie + ", descripcion=" + descripcion
 				+ ", categoria=" + categoria + ", temporadas=" + temporadas + ", actores=" + actores + ", creadores="
-				+ creadores + ", usuario=" + usuario + "]";
+				+ creadores + "]";
 	}
     
 }

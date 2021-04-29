@@ -19,6 +19,9 @@ public class Capitulo {
 	@ManyToOne
 	protected Temporada temporada;
 	
+	protected Capitulo() {
+		
+	}
 	
 	public Capitulo(String titulo, String enlace, String descripcion, Temporada temporada) {
 		super();

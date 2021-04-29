@@ -23,6 +23,9 @@ public class Temporada {
 	@ManyToOne
 	protected Serie serie;
 	
+	protected Temporada() {
+		
+	}
 
 	public Temporada(Serie serie) {
 		super();

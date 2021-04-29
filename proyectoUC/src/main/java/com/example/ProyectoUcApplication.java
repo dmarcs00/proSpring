@@ -33,14 +33,15 @@ public class ProyectoUcApplication {
 	    	Categoria silver = new Categoria(0.75, "Silver");
 	    	Categoria gold = new Categoria(1.5, "Gold");*/
 	    	//Usuarios
-	    	ur.save(new Usuario("usr1", "pass", "12345678910", false));
-	    	ur.save(new Usuario("usr2", "pass", "12345678911", false));
-	    	ur.save(new Usuario("usr3", "pass", "12345678912", true));
+	    	Usuario usuario1 = new Usuario("usr1", "pass", "12345678910", false);
+	    	//ur.save(usuario1);
+	    	//ur.save(new Usuario("usr2", "pass", "12345678911", false));
+	    	//ur.save(new Usuario("usr3", "pass", "12345678912", true));
 	      
 	    	//Series
-	    	Serie s1 = new Serie("Serie1", "Descripcion de la serie 1", null);
-	    	//Serie s2 = new Serie("Serie2", "Descripcion de la serie 2", silver);
-	    	//Serie s3 = new Serie("Serie3", "Descripcion de la serie 1", gold);
+	    	/*Serie s1 = new Serie("Serie1", "Descripcion de la serie 1", null);
+	    	//Serie s2 = new Serie("Serie2", "Descripcion de la serie 2", null);
+	    	//Serie s3 = new Serie("Serie3", "Descripcion de la serie 1", null);
 	    	//actores
 	    	Actor a1 = new Actor("David", "Marcos");
 	    	Actor a2 = new Actor("Juan", "Otere");
@@ -91,6 +92,12 @@ public class ProyectoUcApplication {
 	    	//ArrayList<Capitulo> capitulos2 = new ArrayList<>();
 	    	//capitulos2.add(c5);
 	    	
+	    	
+	    	//series finalizadas
+	    	ArrayList<Serie> series_finalizadas = new ArrayList<>();
+	    	series_finalizadas.add(s1);
+	    	usuario1.setSeriesFinalizadas(series_finalizadas);
+	    	
 	    	t1.setCapitulos(capitulos1);
 	    	//t2.setCapitulos(capitulos2);
 	    	
@@ -101,7 +108,8 @@ public class ProyectoUcApplication {
 	    	s1.setActores(actores1);
 	    	//Save de Series
 	    	System.out.println(s1.toString());
-	    	sr.save(s1);
+	    	sr.save(s1);*/
+	    	ur.save(usuario1);
 	    	//sr.save(s2);
 	    	//sr.save(s3);
 	    };
