@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -22,11 +24,12 @@ public class Usuario {
 	private boolean es_VIP;
 	@ManyToMany
 	private List<Serie> series_pendientes = new ArrayList<>();
+	
 	@ManyToMany
 	private List<Serie> series_finalizadas = new ArrayList<>();
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<SeriesVisualizada> series_empezadas = new ArrayList<>();
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Factura> facturas = new ArrayList<>();
 	
 	protected Usuario () {

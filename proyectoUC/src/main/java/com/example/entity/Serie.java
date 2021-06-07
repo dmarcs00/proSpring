@@ -58,12 +58,12 @@ public class Serie {
 		this.nombre_serie = nombre_serie;
 	}
 
-	/*public Categoria getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}*/
+	}
 	
     public List<Temporada> getTemporadas() {
         return temporadas;

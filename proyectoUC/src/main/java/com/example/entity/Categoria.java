@@ -20,6 +20,9 @@ public class Categoria {
 		this.precio = precio;
 		this.nombre = nombre;
 	}
+	protected Categoria() {
+		
+	}
 	public Integer getId() {
 		return id;
 	}

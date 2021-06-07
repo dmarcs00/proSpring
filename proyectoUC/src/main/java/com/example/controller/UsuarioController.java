@@ -5,15 +5,18 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.entity.Factura;
 import com.example.entity.Usuario;
 import com.example.service.impl.UsuarioService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
@@ -51,4 +54,25 @@ public class UsuarioController {
 		return result; 	
 	}
 	
+	@GetMapping(value="/{id}/facturas")
+	//@JsonView(Views.DescripcionUsuario.class)
+	public ResponseEntity<List<Factura>> obtenerFacturas(@PathVariable("id") String userId) {
+		
+		Optional<Usuario> u = us.findById(userId);
+		List<Factura> facturas = null;
+		ResponseEntity<List<Factura>> result;
+		
+		if (u.isPresent()) {
+			facturas = u.get().getFactura();
+			if (facturas != null) {
+				result = ResponseEntity.ok(facturas);	
+			} else { 
+				result = ResponseEntity.notFound().build();	
+			}
+		} else {
+			result = ResponseEntity.notFound().build();
+		}
+		
+		return result; 	
+	}
 }

@@ -17,7 +17,7 @@ public class Temporada {
 	
 	@Id
 	@GeneratedValue
-	protected int numero_temporada;
+	protected Integer numero_temporada;
 	@OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
 	protected List<Capitulo> capitulos = new ArrayList<>();
 	@ManyToOne
@@ -37,7 +37,7 @@ public class Temporada {
     public void setCapitulos(List<Capitulo> capitulos) {
     	this.capitulos = capitulos;
     }
-	public int getNumero_temporada() {
+	public Integer getNumero_temporada() {
 		return numero_temporada;
 	}
 	public void setNumero_temporada(int numero_temporada) {
