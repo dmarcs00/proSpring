@@ -1,7 +1,5 @@
 package com.example.entity;
 
-import java.sql.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,20 +7,23 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.example.views.View.DescripcionUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class CargoCapitulo {
 	@Id
 	@GeneratedValue
+	@JsonView({DescripcionUsuario.class})
 	private Integer id;
-	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL)
+	@JsonView({DescripcionUsuario.class})
 	private Capitulo capitulo;
+	@JsonView({DescripcionUsuario.class})
 	private double precio;
+	@JsonView({DescripcionUsuario.class})
 	private String fecha;
-	private String nombre_serie;
-	private String temporada_x_capitulo;
 	@ManyToOne
 	@JsonIgnore
 	private Factura factura;
@@ -32,8 +33,6 @@ public class CargoCapitulo {
 		this.capitulo = capitulo;
 		this.fecha = fecha;
 		this.factura = factura;
-		this.nombre_serie = capitulo.getTemporada().getSerie().nombre_serie;
-		this.temporada_x_capitulo = capitulo.getTemporada().getNumero_temporada().toString() + "x" + capitulo.getNumero_capitulo().toString();
 		this.precio = capitulo.getTemporada().getSerie().getCategoria().getPrecio();
 	}
 	protected CargoCapitulo() {
@@ -51,12 +50,6 @@ public class CargoCapitulo {
 	public void setFactura(Factura factura) {
 		this.factura = factura;
 	}
-	public String getNombre_serie() {
-		return nombre_serie;
-	}
-	public void setNombre_serie(String nombre_serie) {
-		this.nombre_serie = nombre_serie;
-	}
 	public Capitulo getCapitulo() {
 		return capitulo;
 	}
@@ -70,12 +63,6 @@ public class CargoCapitulo {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public String getTemporada_x_capitulo() {
-		return temporada_x_capitulo;
-	}
-	public void setTemporada_x_capitulo(String temporada_x_capitulo) {
-		this.temporada_x_capitulo = temporada_x_capitulo;
-	}
 	public double getPrecio() {
 		return precio;
 	}
@@ -87,8 +74,6 @@ public class CargoCapitulo {
 		result = prime * result + ((factura == null) ? 0 : factura.hashCode());
 		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nombre_serie == null) ? 0 : nombre_serie.hashCode());
-		result = prime * result + ((temporada_x_capitulo == null) ? 0 : temporada_x_capitulo.hashCode());
 		return result;
 	}
 	@Override
@@ -119,16 +104,6 @@ public class CargoCapitulo {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (nombre_serie == null) {
-			if (other.nombre_serie != null)
-				return false;
-		} else if (!nombre_serie.equals(other.nombre_serie))
-			return false;
-		if (temporada_x_capitulo == null) {
-			if (other.temporada_x_capitulo != null)
-				return false;
-		} else if (!temporada_x_capitulo.equals(other.temporada_x_capitulo))
 			return false;
 		return true;
 	}

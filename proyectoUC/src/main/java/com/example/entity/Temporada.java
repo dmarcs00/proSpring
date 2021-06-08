@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Temporada {
@@ -21,6 +23,7 @@ public class Temporada {
 	@OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
 	protected List<Capitulo> capitulos = new ArrayList<>();
 	@ManyToOne
+	@JsonIgnore
 	protected Serie serie;
 	
 	protected Temporada() {

@@ -7,16 +7,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.example.views.View.DescripcionSerie;
+import com.example.views.View.DescripcionUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 public class Capitulo {
 	
 	@Id
 	@GeneratedValue
+	@JsonView({DescripcionUsuario.class, DescripcionSerie.class})
 	protected Integer numero_capitulo;
 	protected String titulo;
 	protected String enlace;
 	protected String descripcion;
 	@ManyToOne
+	@JsonIgnore
 	protected Temporada temporada;
 	
 	protected Capitulo() {

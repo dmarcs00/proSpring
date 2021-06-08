@@ -54,7 +54,7 @@ public class UsuarioController {
 		return result; 	
 	}
 	
-	@GetMapping(value="/{id}/facturas")
+	/*@GetMapping(value="/{id}/facturas")  No HACE FALTA YA QUE LAS PODEMOS SACAR DE USUARIO
 	//@JsonView(Views.DescripcionUsuario.class)
 	public ResponseEntity<List<Factura>> obtenerFacturas(@PathVariable("id") String userId) {
 		
@@ -74,5 +74,5 @@ public class UsuarioController {
 		}
 		
 		return result; 	
-	}
+	}*/
 }
