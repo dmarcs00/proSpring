@@ -18,8 +18,9 @@ public class CargoCapitulo {
 	@JsonView({DescripcionUsuario.class})
 	private Integer id;
 	@OneToOne(cascade=CascadeType.ALL)
-	@JsonView({DescripcionUsuario.class})
 	private Capitulo capitulo;
+	@JsonView({DescripcionUsuario.class})
+	private String temporada_x_capitulo;
 	@JsonView({DescripcionUsuario.class})
 	private double precio;
 	@JsonView({DescripcionUsuario.class})
@@ -34,6 +35,8 @@ public class CargoCapitulo {
 		this.fecha = fecha;
 		this.factura = factura;
 		this.precio = capitulo.getTemporada().getSerie().getCategoria().getPrecio();
+		this.temporada_x_capitulo = capitulo.getTemporada().getNumero_temporada().toString() + "x" + capitulo.getNumero_capitulo().toString();
+
 	}
 	protected CargoCapitulo() {
 		
@@ -57,6 +60,9 @@ public class CargoCapitulo {
 		this.capitulo = capitulo;
 	}
 	
+	public String getTemporada_x_capitulo() {
+		return temporada_x_capitulo;
+	}
 	public String getFecha() {
 		return fecha;
 	}

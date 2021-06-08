@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.example.views.View.DescripcionSerie;
+import com.example.views.View.DescripcionUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -16,10 +16,10 @@ import javax.persistence.Id;
 @Entity
 public class Factura {
 	@Id
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionUsuario.class})
 	private String num_factura;
 	@OneToMany(mappedBy = "factura", cascade=CascadeType.ALL)
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionUsuario.class})
 	private List<CargoCapitulo> capitulos_vistos_factura = new ArrayList<>();
 	@ManyToOne
 	@JsonIgnore

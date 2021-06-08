@@ -149,19 +149,38 @@ public class ProyectoUcApplication {
 	    	//Facturas
 	    	Factura f1 = new Factura("052021", usuario1);
 	    	ArrayList<CargoCapitulo> capitulos_vistos = new ArrayList<>();
-	    	CargoCapitulo cp1 = new CargoCapitulo(c1, "01/06/2021", f1);
-	    	CargoCapitulo cp2 = new CargoCapitulo(c2, "02/06/2021", f1);
-	    	CargoCapitulo cp3 = new CargoCapitulo(c3, "02/06/2021", f1);
+	    	CargoCapitulo cp1 = new CargoCapitulo(c1, "01/05/2021", f1);
+	    	CargoCapitulo cp2 = new CargoCapitulo(c2, "02/05/2021", f1);
+	    	CargoCapitulo cp3 = new CargoCapitulo(c3, "12/05/2021", f1);
 	    	CargoCapitulo cp4 = new CargoCapitulo(c4, "03/05/2021", f1);
-	    	CargoCapitulo cp5 = new CargoCapitulo(c1, "04/04/2021", f1);
+	    	CargoCapitulo cp5 = new CargoCapitulo(c1, "04/05/2021", f1);
 	    	capitulos_vistos.add(cp1);
 	    	capitulos_vistos.add(cp2);
 	    	capitulos_vistos.add(cp3);
 	    	capitulos_vistos.add(cp4);
 	    	capitulos_vistos.add(cp5);
 	    	f1.setCapitulos_vistos_factura(capitulos_vistos);
+	    	
+	    	Factura f2 = new Factura("062021", usuario1);
+	    	ArrayList<CargoCapitulo> capitulos_vistos2 = new ArrayList<>();
+	    	CargoCapitulo cp6 = new CargoCapitulo(c1, "01/06/2021", f2);
+	    	CargoCapitulo cp7 = new CargoCapitulo(c2, "02/06/2021", f2);
+	    	CargoCapitulo cp8 = new CargoCapitulo(c3, "12/06/2021", f2);
+	    	CargoCapitulo cp9 = new CargoCapitulo(c4, "03/06/2021", f2);
+	    	CargoCapitulo cp10 = new CargoCapitulo(c1, "04/06/2021", f2);
+	    	CargoCapitulo cp11 = new CargoCapitulo(c4, "15/06/2021", f2);
+	    	CargoCapitulo cp12 = new CargoCapitulo(c1, "24/06/2021", f2);
+	    	capitulos_vistos2.add(cp6);
+	    	capitulos_vistos2.add(cp7);
+	    	capitulos_vistos2.add(cp8);
+	    	capitulos_vistos2.add(cp9);
+	    	capitulos_vistos2.add(cp10);
+	    	capitulos_vistos2.add(cp11);
+	    	capitulos_vistos2.add(cp12);
+	    	f2.setCapitulos_vistos_factura(capitulos_vistos2);
 	    	ArrayList<Factura> facturas = new ArrayList<>();
 	    	facturas.add(f1);
+	    	facturas.add(f2);
 	    	usuario1.setFactura(facturas);
 	    	
 	    	

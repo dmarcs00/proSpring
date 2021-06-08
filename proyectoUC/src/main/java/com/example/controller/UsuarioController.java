@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.Factura;
 import com.example.entity.Usuario;
 import com.example.service.impl.UsuarioService;
+import com.example.views.View.DescripcionUsuario;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
 @CrossOrigin
@@ -24,7 +26,7 @@ public class UsuarioController {
 	UsuarioService us;
 	
 	@GetMapping(value="/{id}")
-	//@JsonView(Views.DescripcionUsuario.class)
+	@JsonView({DescripcionUsuario.class})
 	public ResponseEntity<Usuario> obtenerUsuario(@PathVariable("id") String userId) {
 		
 		Optional<Usuario> u = us.findById(userId);

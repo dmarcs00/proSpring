@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.example.views.View.DescripcionUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 
@@ -18,18 +20,26 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Usuario {
 	
 	@Id
+	@JsonView({DescripcionUsuario.class})
 	private String usuarioId;
+	@JsonView({DescripcionUsuario.class})
 	private String password;
+	@JsonView({DescripcionUsuario.class})
 	private String IBAN;
+	@JsonView({DescripcionUsuario.class})
 	private boolean es_VIP;
 	@ManyToMany
+	@JsonView({DescripcionUsuario.class})
 	private List<Serie> series_pendientes = new ArrayList<>();
 	
 	@ManyToMany
+	@JsonView({DescripcionUsuario.class})
 	private List<Serie> series_finalizadas = new ArrayList<>();
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonView({DescripcionUsuario.class})
 	private List<SeriesVisualizada> series_empezadas = new ArrayList<>();
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonView({DescripcionUsuario.class})
 	private List<Factura> facturas = new ArrayList<>();
 	
 	protected Usuario () {
