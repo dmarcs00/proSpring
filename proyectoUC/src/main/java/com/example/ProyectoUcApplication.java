@@ -37,11 +37,11 @@ public class ProyectoUcApplication {
 	public CommandLineRunner demo(UsuarioRepository ur, SerieRepository sr) {
 	    return (args) -> {
 	    	
-	    	//Categoria normal = new Categoria(0.5, "Normal");
+	    	Categoria normal = new Categoria(0.5, "Normal");
 	    	Categoria silver = new Categoria(0.75, "Silver");
-	    	//Categoria gold = new Categoria(1.5, "Gold");
+	    	Categoria gold = new Categoria(1.5, "Gold");
 	    	//Usuarios
-	    	Usuario usuario1 = new Usuario("usr1", "pass", "12345678910", false);
+	    	Usuario usuario1 = new Usuario("usr1", "pass", "12345678910", true);
 	    	
 	    	
 	    	//ur.save(new Usuario("usr2", "pass", "12345678911", false));
@@ -71,10 +71,31 @@ public class ProyectoUcApplication {
 	    	temporadas1.add(t3);
 	    	s1.setTemporada(temporadas1);
 	    
+	    	
+	    	Serie s2 = new Serie("Serie2", "Descripcion de la serie 2", gold);
+	    	Temporada t21 = new Temporada(s2);
+	    	Capitulo c21 = new Capitulo("Comienzo2", "https://netflix.com", "La introduccion a todo lo desconocido serie2", t21);
+	    	Capitulo c22 = new Capitulo("Nudo2", "https://netflix.com", "El nudo a todo lo desconocido serie2", t21);
+	    	Capitulo c23 = new Capitulo("Desenlace2", "https://netflix.com", "El desenlace a todo lo desconocido serie2", t21);
+	    	Capitulo c24 = new Capitulo("Final2", "https://netflix.com", "El final a todo lo desconocido serie2", t21);
+	    	ArrayList<Capitulo> capitulos21 = new ArrayList<>();
+	    	capitulos21.add(c21);
+	    	capitulos21.add(c22);
+	    	capitulos21.add(c23);
+	    	capitulos21.add(c24);
+	    	t21.setCapitulos(capitulos21);
+	    	ArrayList<Temporada> temporadas21 = new ArrayList<>();
+	    	temporadas21.add(t21);
+	    	s2.setTemporada(temporadas21);
 	    	sr.save(s1);
+	    	sr.save(s2);
 	    	List<Serie> series_finalizadas = new ArrayList<>();
-	    	series_finalizadas.add(s1);
-	    	//usuario1.setSeriesFinalizadas(series_finalizadas);
+	    	List<Serie> series_pendientes = new ArrayList<>();
+	    	series_finalizadas.add(s2);
+	    	series_pendientes.add(s1);
+	    	usuario1.setSeriesFinalizadas(series_finalizadas);
+	    	usuario1.setSeriesPendientes(series_pendientes);
+	    	
 	    	//Serie s2 = new Serie("Serie2", "Descripcion de la serie 2", null);
 	    	//Serie s3 = new Serie("Serie3", "Descripcion de la serie 1", null);
 	    	//actores

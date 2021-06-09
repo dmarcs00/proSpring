@@ -6,13 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import com.example.views.View.DescripcionSerie;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 public class Categoria {
 
 	@Id
 	@GeneratedValue
 	protected int id;
+	@JsonView({DescripcionSerie.class})
 	protected double precio;
+	@JsonView({DescripcionSerie.class})
 	private String nombre;
 	
 	public Categoria(double precio, String nombre) {

@@ -17,6 +17,9 @@ import javax.persistence.OrderColumn;
 
 import com.example.VO.Actor;
 import com.example.VO.Creador;
+import com.example.views.View.DescripcionSerie;
+import com.example.views.View.DescripcionUsuario;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.Id;
 
@@ -24,18 +27,25 @@ import javax.persistence.Id;
 public class Serie {
 	@Id
 	@GeneratedValue
-	protected int numero_serie;
+	@JsonView({DescripcionSerie.class})
+	protected Integer numero_serie;
+	@JsonView({DescripcionSerie.class})
 	protected String nombre_serie;
+	@JsonView({DescripcionSerie.class})
 	protected String descripcion;
 	@OneToOne(cascade = CascadeType.ALL)
+	@JsonView({DescripcionSerie.class})
 	protected Categoria categoria;
 	@OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+	@JsonView({DescripcionSerie.class})
 	protected List<Temporada> temporadas = new ArrayList<>();
 	@ElementCollection
 	@OrderColumn(name="actores")
+	@JsonView({DescripcionSerie.class})
 	protected List<Actor> actores = new ArrayList<>();
 	@ElementCollection
 	@OrderColumn(name="creadores")
+	@JsonView({DescripcionSerie.class})
 	protected List<Creador> creadores = new ArrayList<>();
 	
 	protected Serie() {
@@ -72,11 +82,11 @@ public class Serie {
 	public void setTemporada(List<Temporada> temporadas) {
     	this.temporadas = temporadas;
     }
-	public int getNumero_serie() {
+	public Integer getNumero_serie() {
 		return numero_serie;
 	}
 
-	public void setNumero_serie(int numero_serie) {
+	public void setNumero_serie(Integer numero_serie) {
 		this.numero_serie = numero_serie;
 	}
 
