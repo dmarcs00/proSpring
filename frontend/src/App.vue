@@ -24,12 +24,12 @@
           <v-tab to="/">Inicio</v-tab>
           <v-tab to="/about">Agregar Serie</v-tab>
           <v-tab to="/facturas">Facturas</v-tab>
-          <v-tab v-show="isSelected" to="/verSerie">Facturas</v-tab>
+          <v-tab v-show="isSelected" to="/verSerie"></v-tab>
         </v-tabs>
       </template>
       </v-app-bar>
-      <router-view></router-view>
-      
+      <router-view v-bind="myProps"></router-view>
+      {{usuario}}
     </v-main>
   </v-app>
 </template>
@@ -37,10 +37,35 @@
 <script>
 export default {
   name: 'App',
-  tab: "null",
+  tab: null,
+  
   data: () => ({
-    //
+    usuario: null,
   }),
+  created(){
+      var self = this;
+      this.axios.get("http://localhost:8080/api/usuarios/usr1").then((result) => {  
+         self.usuario = result.data;
+      });
+  },
+  computed:{
+    myProps() {
+      if (this.$route.name === 'Principal') { 
+        let prop = this.usuario;
+        return { prop: prop }
+        }
+      if(this.$route.name ==='Facturas'){
+        let prop=[
+          {
+            facturas: this.usuario.facturas,
+            vip:this.usuario.es_VIP
+          }
+        ]
+         return { prop: prop }
+        }
+      else { return null}
+    }
+  }
  
 };
 </script>

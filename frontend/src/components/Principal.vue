@@ -95,18 +95,12 @@
 <script>
   export default {
     props: {
-      serieClick: {
-        type: Array,
-        default: () => [
-          {
-            nombre:"serie1",
-            temporadas: 18,
-            capitulos: 25,
-          },
-        ]
-      }
+      prop:{
+          type: Object,
+      } 
     },
-     methods:{
+    name:'Principal',
+    methods:{
       mostrarSerie(tipo, serie){
         if(tipo == 'pendiente'){
           this.$router.push({ name: 'verSerie', params: {serie: serie }})
@@ -114,13 +108,11 @@
         
       }
     },
-    name: 'Principal',
-   
     data: () => ({
       result:'jiji',
       color: '#01579B',
-      
-      seriesPendientes: [
+      seriesPendientes: [],
+     /* seriesPendientes: [
         {
           nombre : "serie 1",
           temporadas: [
@@ -210,7 +202,7 @@
         {
           nombre : "serie 8"
         },
-      ],
+      ],*/
       seriesFinalizadas: [
         {
           nombre : "serie 9"

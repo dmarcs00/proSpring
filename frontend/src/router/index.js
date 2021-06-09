@@ -1,29 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Principal from '../components/Principal.vue'
 
 Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Principal',
+    component: Principal,
+    props: true,
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../views/About.vue')
   },
   {
     path: '/verSerie',
     name: 'verSerie',
-    component: () => import(/* webpackChunkName: "about" */ '../components/VerSerie.vue'),
+    component: () => import('../components/VerSerie.vue'),
     props: true
   },
   {
     path: '/facturas',
     name: 'Facturas',
-    component: () => import(/* webpackChunkName: "about" */ '../components/Facturas.vue')
+    component: () => import('../components/Facturas.vue'),
+    props: true,
   },
 ]
 
