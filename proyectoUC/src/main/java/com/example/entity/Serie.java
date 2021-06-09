@@ -27,9 +27,9 @@ import javax.persistence.Id;
 public class Serie {
 	@Id
 	@GeneratedValue
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected Integer numero_serie;
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected String nombre_serie;
 	@JsonView({DescripcionSerie.class})
 	protected String descripcion;
@@ -37,7 +37,7 @@ public class Serie {
 	@JsonView({DescripcionSerie.class})
 	protected Categoria categoria;
 	@OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected List<Temporada> temporadas = new ArrayList<>();
 	@ElementCollection
 	@OrderColumn(name="actores")

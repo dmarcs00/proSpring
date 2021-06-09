@@ -19,11 +19,11 @@ public class Capitulo {
 	@GeneratedValue
 	@JsonView({DescripcionUsuario.class, DescripcionSerie.class})
 	protected Integer numero_capitulo;
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected String titulo;
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected String enlace;
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected String descripcion;
 	@ManyToOne
 	@JsonIgnore

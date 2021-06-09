@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.example.views.View.DescripcionSerie;
+import com.example.views.View.DescripcionUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -21,10 +22,10 @@ public class Temporada {
 	
 	@Id
 	@GeneratedValue
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected Integer numero_temporada;
 	@OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
-	@JsonView({DescripcionSerie.class})
+	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected List<Capitulo> capitulos = new ArrayList<>();
 	@ManyToOne
 	@JsonIgnore

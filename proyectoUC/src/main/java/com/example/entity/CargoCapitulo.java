@@ -25,6 +25,8 @@ public class CargoCapitulo {
 	private double precio;
 	@JsonView({DescripcionUsuario.class})
 	private String fecha;
+	@JsonView({DescripcionUsuario.class})
+	private String nombre_serie;
 	@ManyToOne
 	@JsonIgnore
 	private Factura factura;
@@ -36,6 +38,7 @@ public class CargoCapitulo {
 		this.factura = factura;
 		this.precio = capitulo.getTemporada().getSerie().getCategoria().getPrecio();
 		this.temporada_x_capitulo = capitulo.getTemporada().getNumero_temporada().toString() + "x" + capitulo.getNumero_capitulo().toString();
+		this.nombre_serie = capitulo.getTemporada().getSerie().getNombre_serie();
 
 	}
 	protected CargoCapitulo() {
@@ -71,6 +74,9 @@ public class CargoCapitulo {
 	}
 	public double getPrecio() {
 		return precio;
+	}
+	public String getNombre_serie() {
+		return nombre_serie;
 	}
 	@Override
 	public int hashCode() {
