@@ -54,17 +54,30 @@ public class ProyectoUcApplication {
 	    	Temporada t2 = new Temporada(s1);
 	    	Temporada t3 = new Temporada(s1);
 	    	
-	    	Capitulo c1 = new Capitulo("Comienzo", "https://netflix.com", "La introduccion a todo lo desconocido", t3);
-	    	Capitulo c2 = new Capitulo("Nudo", "https://netflix.com", "El nudo a todo lo desconocido", t3);
-	    	Capitulo c3 = new Capitulo("Desenlace", "https://netflix.com", "El desenlace a todo lo desconocido", t3);
-	    	Capitulo c4 = new Capitulo("Final", "https://netflix.com", "El final a todo lo desconocido", t3);
+	    	Capitulo c1 = new Capitulo("Comienzot2", "https://netflix.com", "La introduccion a todo lo desconocido", t2);
+	    	Capitulo c2 = new Capitulo("Nudot2", "https://netflix.com", "El nudo a todo lo desconocido", t2);
+	    	Capitulo c3 = new Capitulo("Desenlacet3", "https://netflix.com", "El desenlace a todo lo desconocido", t3);
+	    	Capitulo c4 = new Capitulo("Finalt3", "https://netflix.com", "El final a todo lo desconocido", t3);
+	    	
+	    	Capitulo c11 = new Capitulo("Comienzot1", "https://netflix.com", "La introduccion a todo lo desconocido", t1);
+	    	Capitulo c12 = new Capitulo("Nudot1", "https://netflix.com", "El nudo a todo lo desconocido", t1);
+	    	Capitulo c13 = new Capitulo("Desenlacet1", "https://netflix.com", "El desenlace a todo lo desconocido", t1);
+	    	Capitulo c14 = new Capitulo("Finalt1", "https://netflix.com", "El final a todo lo desconocido", t1);
 	    	
 	    	ArrayList<Capitulo> capitulos1 = new ArrayList<>();
-	    	capitulos1.add(c1);
-	    	capitulos1.add(c2);
-	    	capitulos1.add(c3);
-	    	capitulos1.add(c4);
-	    	t3.setCapitulos(capitulos1);
+	    	capitulos1.add(c11);
+	    	capitulos1.add(c12);
+	    	capitulos1.add(c13);
+	    	capitulos1.add(c14);
+	    	t1.setCapitulos(capitulos1);
+	    	ArrayList<Capitulo> capitulos2 = new ArrayList<>();
+	    	capitulos2.add(c1);
+	    	capitulos2.add(c2);
+	    	t2.setCapitulos(capitulos2);
+	    	ArrayList<Capitulo> capitulos3 = new ArrayList<>();
+	    	capitulos3.add(c3);
+	    	capitulos3.add(c4);
+	    	t3.setCapitulos(capitulos3);
 	    	ArrayList<Temporada> temporadas1 = new ArrayList<>();
 	    	temporadas1.add(t1);
 	    	temporadas1.add(t2);
