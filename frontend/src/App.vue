@@ -14,7 +14,6 @@
          <template 
           v-slot:extension>
         <v-tabs
-         v-model="tab"
          align-with-title
          slider-size = "4"
          >
@@ -24,12 +23,11 @@
           <v-tab to="/">Inicio</v-tab>
           <v-tab to="/about">Agregar Serie</v-tab>
           <v-tab to="/facturas">Facturas</v-tab>
-          <v-tab v-show="isSelected" to="/verSerie"></v-tab>
+          <v-tab v-show="false" to="/verSerie"></v-tab>
         </v-tabs>
       </template>
       </v-app-bar>
       <router-view v-bind="myProps"></router-view>
-      {{usuario}}
     </v-main>
   </v-app>
 </template>

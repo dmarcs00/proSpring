@@ -20,7 +20,7 @@
                     @click="mostrarSerie('pendiente',serieP)"
                   >
                     <v-list-item-content>
-                      <v-list-item-title v-text="serieP.nombre"></v-list-item-title>
+                      <v-list-item-title v-text="serieP.nombre_serie"></v-list-item-title>
                       <v-divider class="mt-1"></v-divider>
                     </v-list-item-content>
                   </v-list-item>
@@ -44,12 +44,12 @@
                   color="teal"
                 >
                   <v-list-item
-                    v-for="(serieE, j) in seriesEmpezadas"
+                    v-for="(serieE, j) in (seriesEmpezadas)"
                     :key="j"
-                    @click="mostrarSerie('pendiente',serieE)"
+                    @click="mostrarSerie('empezada',serieE.serie, serieE.ultimo_capitulo_visto)"
                   >
                     <v-list-item-content>
-                      <v-list-item-title v-text="serieE.nombre"></v-list-item-title>
+                      <v-list-item-title v-text="serieE.serie.nombre_serie"></v-list-item-title>
                       <v-divider class="mt-1"></v-divider>
                     </v-list-item-content>
                   
@@ -76,10 +76,10 @@
                   <v-list-item
                     v-for="(serieF, k) in seriesFinalizadas"
                     :key="k"
-                    @click="mostrarSerie('pendiente',serieF)"
+                    @click="mostrarSerie('finalizada',serieF, 0)"
                   >
                     <v-list-item-content>
-                      <v-list-item-title v-text="serieF.nombre"></v-list-item-title>
+                      <v-list-item-title v-text="serieF.nombre_serie"></v-list-item-title>
                        <v-divider  class="mt-1"></v-divider>
                     </v-list-item-content>
                   </v-list-item>
@@ -89,6 +89,7 @@
           </v-card>
         </v-col>
       </v-row>
+      {{prop.series_empezadas}}
     </v-container>
 </template>
 
@@ -96,123 +97,41 @@
   export default {
     props: {
       prop:{
-          type: Object,
-      } 
+          type: Object
+      }, 
     },
     name:'Principal',
-    methods:{
-      mostrarSerie(tipo, serie){
-        if(tipo == 'pendiente'){
-          this.$router.push({ name: 'verSerie', params: {serie: serie }})
-        }
-        
-      }
-    },
     data: () => ({
       result:'jiji',
       color: '#01579B',
-      seriesPendientes: [],
-     /* seriesPendientes: [
-        {
-          nombre : "serie 1",
-          temporadas: [
-            {
-              numero: 1,
-              capitulos:[
-                {
-                  numero:1,
-                  descripcion: "hola soy una descripccion 1"
-                  
-                },
-                {
-                  numero:2,
-                  descripcion: "hola soy una descripccion 2"
-                },
-                {
-                  numero:3,
-                  descripcion: "hola soy una descripccion 3"
-                },
-              ]
-            },
-            {
-              numero: 2,
-              capitulos:[
-                {
-                  numero:1,
-                  descripcion: "hola soy una descripccion 1"
-                },
-                {
-                  numero:2,
-                  descripcion: "hola soy una descripccion 2"
-                },
-                {
-                  numero:3,
-                  descripcion: "hola soy una descripccion 3"
-                },
-              ]
-            },
-            {
-              numero: 3,
-              capitulos:[
-                {
-                  numero:1,
-                  descripcion: "hola soy una descripccion 1"
-                },
-                {
-                  numero:2,
-                  descripcion: "hola soy una descripccion 2"
-                },
-                {
-                  numero:3,
-                  descripcion: "hola soy una descripccion 3"
-                },
-                {
-                  numero:4,
-                  descripcion: "hola soy una descripccion 4"
-                },
-                {
-                  numero:5,
-                  descripcion: "hola soy una descripccion 5"
-                },
-              ]
-            },
-           
-          ]
-        },
-        {
-          nombre : "serie 2"
-        },
-        {
-          nombre : "serie 3"
-        },
-        {
-          nombre : "serie 4"
-        },
-      ],
-      seriesEmpezadas:  [
-        {
-          nombre : "serie 5"
-        },
-        {
-          nombre : "serie 6"
-        },
-        {
-          nombre : "serie 7"
-        },
-        {
-          nombre : "serie 8"
-        },
-      ],*/
-      seriesFinalizadas: [
-        {
-          nombre : "serie 9"
-        },
-        {
-          nombre : "serie 10"
-        },
-      ],
-      
+      seriesPendientes:null,
+      seriesFinalizadas: null,
+      seriesEmpezadas: null,
     }),
+    methods:{
+      mostrarSerie(tipo, serie, capitulosVisto){
+        if(tipo == 'pendiente'){
+          this.$router.push({ name: 'verSerie', params: {serie: serie, capitulosVisto: 0 }})
+        }else if(tipo == 'empezada'){
+          this.$router.push({ name: 'verSerie', params: {serie: serie, capitulosVisto: capitulosVisto}})
+        }else if (tipo == 'finalizada'){
+         for (let i = 0; i < serie.temporadas.length; i++) {
+            capitulosVisto += serie.temporadas[i].capitulos.length;
+          }
+          this.$router.push({ name: 'verSerie', params: {serie: serie, capitulosVisto: capitulosVisto}}) //no le paso capitulosVisto debido a que ya tiene todos vistos
+         }
+        }        
+      },
+  mounted(){//cada vez que se vuelve al inicio por router, se llama aqui
+      this.seriesPendientes = this.prop.series_pendientes;
+      this.seriesEmpezadas = this.prop.series_empezadas;
+      this.seriesFinalizadas = this.prop.series_finalizadas;
+  },
+  updated(){// al inicio de la aplicacion para cargar las series
+      this.seriesPendientes = this.prop.series_pendientes;
+      this.seriesEmpezadas = this.prop.series_empezadas
+      this.seriesFinalizadas = this.prop.series_finalizadas;
+  },
   }
 </script>
 
