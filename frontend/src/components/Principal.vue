@@ -2,6 +2,7 @@
     <v-container>
       <v-row dense>
         <v-col cols="7">
+        <h1>Series de {{prop.usuarioId}}</h1> 
           <v-card
             elevation="24"          
           >
@@ -89,7 +90,6 @@
           </v-card>
         </v-col>
       </v-row>
-      {{prop.series_empezadas}}
     </v-container>
 </template>
 
@@ -118,10 +118,21 @@
          for (let i = 0; i < serie.temporadas.length; i++) {
             capitulosVisto += serie.temporadas[i].capitulos.length;
           }
-          this.$router.push({ name: 'verSerie', params: {serie: serie, capitulosVisto: capitulosVisto}}) //no le paso capitulosVisto debido a que ya tiene todos vistos
+          this.$router.push({ name: 'verSerie', params: {serie: serie, capitulosVisto: capitulosVisto}})
          }
         }        
       },
+  /*computed:{
+    seriesEmpezadas: function() {
+      return this.prop.series_empezadas;
+    },
+    seriesPendientes: function() {
+      return this.prop.series_pendientes;
+    },
+    seriesFinalizadas: function() {
+      return this.prop.series_empezadas;
+    },
+  },*/
   mounted(){//cada vez que se vuelve al inicio por router, se llama aqui
       this.seriesPendientes = this.prop.series_pendientes;
       this.seriesEmpezadas = this.prop.series_empezadas;

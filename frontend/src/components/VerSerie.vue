@@ -8,7 +8,7 @@
   <h1
     class="display-1 ml-5"
   >
-  {{serie.nombre}}
+  {{serie.nombre_serie}}
   </h1>
     <v-slide-group
       v-model="model"
@@ -78,7 +78,7 @@
               <v-expansion-panel-content>
                 {{capitulo.descripcion}}
                 <v-btn
-                  :disabled="false"
+                  :disabled="esSerieFinalizada"
                   small
                   outlined
                   color="teal"
@@ -93,7 +93,6 @@
         </div>
       </v-sheet>
     </v-expand-transition>
-    {{model}}
   </v-sheet>
 </template>
 
@@ -104,7 +103,7 @@
       serie:{
         type: Object,
       },
-      capitulosVisto:{ //puede ser 0, >0 o null. con esto distinguiremos que tipo de serie es la que es.
+      capitulosVisto:{ 
         default: null,
         type: Number,
       }
@@ -113,13 +112,14 @@
     data: () => ({
       vistoDisabled: false,
       model: -1,
+      capitulos_vistos: 0,
       expmodel: null,
       contador: 0,
       boolIcon: false, //si es true el capitulo se ha visto
     }),
     methods:{
       estaVisto: function (numero_capitulo) {
-        if((numero_capitulo - this.primerId) < this.capitulosVisto){
+        if((numero_capitulo - this.primerId) < this.capitulos_vistos){
           return true;
         }
         return false;
@@ -129,18 +129,22 @@
         //primero hay que hacer un for o un calculo para actualizar la vista. Esto es por si se ve un capitulo más avanzado para que todos los anteriores queden vistos
         //tambien puede que se le pase el numero de capitulos visto, ya que este al estar calculado aqui, no es necesario calcularlo en el backend
         //primer paso prevenir si se pulsa un capitulo cualquiera que todos los anteriores queden vistos.
-        this.capitulosVisto = numero_capitulo - this.primerId + 1
-
+        this.capitulos_vistos = numero_capitulo - this.primerId + 1;
+        alert("http://localhost:8080/api/usuarios/usr1/ver-capitulo-"+this.capitulos_vistos+"/"+this.serie.nombre_serie)
+        this.axios.put("http://localhost:8080/api/usuarios/usr1/ver-capitulo-"+this.capitulos_vistos+"/"+this.serie.nombre_serie, ).then((result) => {
+          console.log(result);
+         });
       }
     },
-    mounted(){//cada vez que se vuelve al inicio por router, se llama aqui
+    mounted(){
+      this.capitulos_vistos = this.capitulosVisto
       var contador = 0;
-      if(this.capitulosVisto == 0){
+      if(this.capitulos_vistos == 0){
         this.model = 0;
       }else{
         for (let i = 0; i < this.serie.temporadas.length; i++){
           for (let j = 0; j < this.serie.temporadas[i].capitulos.length; j++) {
-            if(contador <= this.capitulosVisto){
+            if(contador <= this.capitulos_vistos){
               ++contador;
             }else{
               this.model=i; //devolvemos el numero de temporada que está para que concuerde con el último capitulo visto
@@ -162,12 +166,22 @@
       primerId: function(){
         return this.serie.temporadas[0].capitulos[0].numero_capitulo;
       },
+      esSerieFinalizada: function(){
+        var contador = 0;
+          for (let i = 0; i < this.serie.temporadas.length; i++) {
+            contador += this.serie.temporadas[i].capitulos.length;
+          }
+          if(contador == this.capitulos_vistos){
+            return true;
+          }
+          return false;
+      },
     },
     watch:{
       model: function(){
         this.expmodel = null; //sirve para que los expasion panels se cierren cada vez que clickemos en temporadas diferentes. Asi, el capitulo no queda "expandido"     
       },
-    },
+    }
   }
 </script>
 <style>
