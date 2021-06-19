@@ -4,11 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Factura;
@@ -16,6 +23,8 @@ import com.example.entity.Usuario;
 import com.example.service.impl.UsuarioService;
 import com.example.views.View.DescripcionUsuario;
 import com.fasterxml.jackson.annotation.JsonView;
+
+
 
 @RestController
 @CrossOrigin
@@ -55,6 +64,23 @@ public class UsuarioController {
 
 		return result; 	
 	}
+	
+	@PutMapping("/usr1/ver-capitulo-{capitulos_vistos}/{nombre_serie}")
+	@JsonView(DescripcionUsuario.class)
+	public ResponseEntity<Usuario> verCapitulo(@PathVariable("nombre_serie") String nombre_serie, @PathVariable("capitulos_vistos") int capitulos_vistos ) throws NotFoundException {
+		
+		ResponseEntity<Usuario> result = null;
+		System.out.println("Capitulos vistos:"+ capitulos_vistos+" de la serie "+nombre_serie);
+		Usuario u = us.aniadirserieEmpezada("usr1", nombre_serie);
+		if (u == null) {
+			result = ResponseEntity.ok(u);
+		} else {
+			result = new ResponseEntity<Usuario>(HttpStatus.FORBIDDEN);
+		}
+		
+		return result;
+	}
+	
 	
 	/*@GetMapping(value="/{id}/facturas")  No HACE FALTA YA QUE LAS PODEMOS SACAR DE USUARIO
 	//@JsonView(Views.DescripcionUsuario.class)

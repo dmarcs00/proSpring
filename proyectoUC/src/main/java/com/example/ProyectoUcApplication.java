@@ -20,6 +20,7 @@ import com.example.entity.CargoCapitulo;
 import com.example.entity.Categoria;
 import com.example.entity.Factura;
 import com.example.entity.Serie;
+import com.example.entity.SeriesVisualizada;
 import com.example.entity.Temporada;
 import com.example.entity.Usuario;
 import com.example.repository.SerieRepository;
@@ -108,7 +109,46 @@ public class ProyectoUcApplication {
 	    	series_pendientes.add(s1);
 	    	usuario1.setSeriesFinalizadas(series_finalizadas);
 	    	usuario1.setSeriesPendientes(series_pendientes);
+	    	Serie s3 = new Serie("Serie3", "Descripcion de la serie 3", new Categoria(0.75, "silver"));
 	    	
+	    	Temporada t31 = new Temporada(s3);
+	    	Temporada t32 = new Temporada(s3);
+	    	
+	    	Capitulo c31 = new Capitulo("Comienzot31", "https://netflix.com", "La introduccion a todo lo desconocido", t31);
+	    	Capitulo c32 = new Capitulo("Nudot31", "https://netflix.com", "El nudo a todo lo desconocido", t31);
+	    	Capitulo c33 = new Capitulo("Desenlacet31", "https://netflix.com", "El desenlace a todo lo desconocido", t31);
+	    	Capitulo c34 = new Capitulo("Finalt31", "https://netflix.com", "El final a todo lo desconocido", t31);
+	    	
+	    	Capitulo c321 = new Capitulo("Comienzot32", "https://netflix.com", "La introduccion a todo lo desconocido", t32);
+	    	Capitulo c322 = new Capitulo("Nudot32", "https://netflix.com", "El nudo a todo lo desconocido", t32);
+	    	Capitulo c323 = new Capitulo("Desenlacet32", "https://netflix.com", "El desenlace a todo lo desconocido", t32);
+	    	Capitulo c324 = new Capitulo("Finalt32", "https://netflix.com", "El final a todo lo desconocido", t32);
+	    	
+	    	ArrayList<Capitulo> capitulos31 = new ArrayList<>();
+	    	capitulos31.add(c31);
+	    	capitulos31.add(c32);
+	    	capitulos31.add(c33);
+	    	capitulos31.add(c34);
+	    	
+	    	ArrayList<Capitulo> capitulos32 = new ArrayList<>();
+	    	capitulos32.add(c321);
+	    	capitulos32.add(c322);
+	    	capitulos32.add(c323);
+	    	capitulos32.add(c324);
+	    	
+	    	t31.setCapitulos(capitulos31);
+	    	t32.setCapitulos(capitulos32);
+	    	ArrayList<Temporada> temporadas3 = new ArrayList<>();
+	    	temporadas3.add(t31);
+	    	temporadas3.add(t32);
+	    	s3.setTemporada(temporadas3);
+	    	sr.save(s3);
+	    	SeriesVisualizada sv1 = new SeriesVisualizada(usuario1, 5, s3);
+	    	
+	    	ArrayList<SeriesVisualizada> svs = new ArrayList<>();
+	    	svs.add(sv1);
+	    	
+	    	System.out.println(usuario1.getSeriesEmpezadas().size());
 	    	//Serie s2 = new Serie("Serie2", "Descripcion de la serie 2", null);
 	    	//Serie s3 = new Serie("Serie3", "Descripcion de la serie 1", null);
 	    	//actores
@@ -217,7 +257,7 @@ public class ProyectoUcApplication {
 	    	facturas.add(f2);
 	    	usuario1.setFactura(facturas);
 	    	
-	    	
+	    	usuario1.setSeriesEmpezadas(svs);
 	    	ur.save(usuario1);
 	    	//sr.save(s2);
 	    	//sr.save(s3);

@@ -2,9 +2,11 @@ package com.example.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 
 import com.example.views.View.DescripcionSerie;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -13,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Categoria {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected int id;
 	@JsonView({DescripcionSerie.class})
 	protected double precio;

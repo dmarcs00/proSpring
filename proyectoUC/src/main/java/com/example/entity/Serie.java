@@ -3,14 +3,12 @@ package com.example.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToOne;
+import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
@@ -26,7 +24,7 @@ import javax.persistence.Id;
 @Entity
 public class Serie {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
 	protected Integer numero_serie;
 	@JsonView({DescripcionSerie.class, DescripcionUsuario.class})
@@ -48,7 +46,7 @@ public class Serie {
 	@JsonView({DescripcionSerie.class})
 	protected List<Creador> creadores = new ArrayList<>();
 	
-	protected Serie() {
+	public Serie() {
 		
 	}
 
