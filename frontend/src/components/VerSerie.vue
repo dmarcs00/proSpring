@@ -77,7 +77,13 @@
               </v-expansion-panel-header>
               <v-expansion-panel-content>
                 {{capitulo.descripcion}}
-                <v-btn :disabled="false" small outlined color="teal" >
+                <v-btn
+                  :disabled="false"
+                  small
+                  outlined
+                  color="teal"
+                  @click="verCapitulo(capitulo.numero_capitulo)"
+                >
                   Ver
                   <v-icon small>mdi-play</v-icon>
                 </v-btn>
@@ -117,6 +123,30 @@
           return true;
         }
         return false;
+      },
+      verCapitulo: function(numero_capitulo){
+        //meter aqui el post para agregar la serie a la lista de empezadas. Se le pasará el id del capitulo y el id de la serie
+        //primero hay que hacer un for o un calculo para actualizar la vista. Esto es por si se ve un capitulo más avanzado para que todos los anteriores queden vistos
+        //tambien puede que se le pase el numero de capitulos visto, ya que este al estar calculado aqui, no es necesario calcularlo en el backend
+        //primer paso prevenir si se pulsa un capitulo cualquiera que todos los anteriores queden vistos.
+        this.capitulosVisto = numero_capitulo - this.primerId + 1
+
+      }
+    },
+    mounted(){//cada vez que se vuelve al inicio por router, se llama aqui
+      var contador = 0;
+      if(this.capitulosVisto == 0){
+        this.model = 0;
+      }else{
+        for (let i = 0; i < this.serie.temporadas.length; i++){
+          for (let j = 0; j < this.serie.temporadas[i].capitulos.length; j++) {
+            if(contador <= this.capitulosVisto){
+              ++contador;
+            }else{
+              this.model=i; //devolvemos el numero de temporada que está para que concuerde con el último capitulo visto
+            }
+          }
+        }
       }
     },
     computed:{
@@ -131,7 +161,7 @@
       },
       primerId: function(){
         return this.serie.temporadas[0].capitulos[0].numero_capitulo;
-      }
+      },
     },
     watch:{
       model: function(){
