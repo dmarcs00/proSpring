@@ -42,7 +42,7 @@ public class ProyectoUcApplication {
 	    	Categoria silver = new Categoria(0.75, "Silver");
 	    	Categoria gold = new Categoria(1.5, "Gold");
 	    	//Usuarios
-	    	Usuario usuario1 = new Usuario("usr1", "pass", "12345678910", true);
+	    	Usuario usuario1 = new Usuario("usr1", "aaaa", "12345678910", true);
 	    	
 	    	
 	    	//ur.save(new Usuario("usr2", "pass", "12345678911", false));

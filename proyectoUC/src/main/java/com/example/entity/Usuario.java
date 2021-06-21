@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -87,6 +88,31 @@ public class Usuario {
 	public void setSeriesEmpezadas(List<SeriesVisualizada> series_empezadas) {
 		this.series_empezadas = series_empezadas;
 	}
+	public void setNuevaSerieEmpezada(SeriesVisualizada serie_empezada) {
+		int contador = 0;
+		ArrayList<SeriesVisualizada> series_visualizadas = new ArrayList<>();
+		series_visualizadas.addAll(this.series_empezadas);
+		boolean existe = false;
+		if(!series_visualizadas.isEmpty()) {
+			for (SeriesVisualizada sv : series_visualizadas) {
+				
+					if(sv.getSerie().getNombre_serie().equals(serie_empezada.getSerie().getNombre_serie())) {
+						series_visualizadas.get(contador).setUltimo_capitulo_visto(serie_empezada.getUltimo_capitulo_visto());
+						existe = true;
+					}
+					++contador;
+			}
+		}else {
+			series_visualizadas.add(serie_empezada);
+		}
+		
+		if(!existe) {
+			series_visualizadas.add(serie_empezada);
+		}
+		
+		this.series_empezadas.clear();
+		this.series_empezadas.addAll(series_visualizadas);
+	}
 	
 	
 	public String getUsuarioId() {
@@ -112,6 +138,20 @@ public class Usuario {
 	}
 	public void setEs_VIP(boolean es_VIP) {
 		this.es_VIP = es_VIP;
+	}
+	
+	public Boolean quitarSeriePendiente(Serie s) {
+		
+		int contador = 0;
+		for (Serie serie : this.series_pendientes) {
+			if(s.getNombre_serie().equals(serie.getNombre_serie())) {
+				this.series_pendientes.remove(contador);
+				return true;
+			}
+			++contador;
+		}
+		
+		return false;
 	}
 	
 	@Override

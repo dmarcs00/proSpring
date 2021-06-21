@@ -65,14 +65,15 @@ public class UsuarioController {
 		return result; 	
 	}
 	
-	@PutMapping("/usr1/ver-capitulo-{capitulos_vistos}/{nombre_serie}")
+	@PutMapping("/usr1/ver-capitulo-{capitulos_vistos}/{numero_serie}")
 	@JsonView(DescripcionUsuario.class)
-	public ResponseEntity<Usuario> verCapitulo(@PathVariable("nombre_serie") String nombre_serie, @PathVariable("capitulos_vistos") int capitulos_vistos ) throws NotFoundException {
+	public ResponseEntity<Usuario> verCapitulo(@PathVariable("numero_serie") Integer numero_serie, @PathVariable("capitulos_vistos") int capitulos_vistos ) throws NotFoundException {
 		
 		ResponseEntity<Usuario> result = null;
-		System.out.println("Capitulos vistos:"+ capitulos_vistos+" de la serie "+nombre_serie);
-		Usuario u = us.aniadirserieEmpezada("usr1", nombre_serie);
-		if (u == null) {
+		System.out.println("Capitulos vistos:"+ capitulos_vistos+" de la serie "+numero_serie);
+		Usuario u = us.aniadirserieEmpezada("usr1", numero_serie, capitulos_vistos);
+		if (u != null) {
+			System.out.println("respuesta buena"+u);
 			result = ResponseEntity.ok(u);
 		} else {
 			result = new ResponseEntity<Usuario>(HttpStatus.FORBIDDEN);
