@@ -78,7 +78,7 @@ public class Usuario {
     }
 	
 	public void setSeriesFinalizadas(List<Serie> series_finalizadas) {
-		this.series_finalizadas = series_finalizadas;
+		this.series_finalizadas.addAll(series_finalizadas);
 	}
 	
     public List<SeriesVisualizada> getSeriesEmpezadas() {
@@ -96,11 +96,11 @@ public class Usuario {
 		if(!series_visualizadas.isEmpty()) {
 			for (SeriesVisualizada sv : series_visualizadas) {
 				
-					if(sv.getSerie().getNombre_serie().equals(serie_empezada.getSerie().getNombre_serie())) {
-						series_visualizadas.get(contador).setUltimo_capitulo_visto(serie_empezada.getUltimo_capitulo_visto());
-						existe = true;
-					}
-					++contador;
+				if(sv.getSerie().getNombre_serie().equals(serie_empezada.getSerie().getNombre_serie())) {
+					series_visualizadas.get(contador).setUltimo_capitulo_visto(serie_empezada.getUltimo_capitulo_visto());
+					existe = true;
+				}
+				++contador;
 			}
 		}else {
 			series_visualizadas.add(serie_empezada);
@@ -113,8 +113,7 @@ public class Usuario {
 		this.series_empezadas.clear();
 		this.series_empezadas.addAll(series_visualizadas);
 	}
-	
-	
+		
 	public String getUsuarioId() {
 		return usuarioId;
 	}
@@ -141,17 +140,40 @@ public class Usuario {
 	}
 	
 	public Boolean quitarSeriePendiente(Serie s) {
-		
-		int contador = 0;
-		for (Serie serie : this.series_pendientes) {
-			if(s.getNombre_serie().equals(serie.getNombre_serie())) {
-				this.series_pendientes.remove(contador);
-				return true;
+		if(this.series_pendientes.isEmpty()) {
+			return false;
+		}else {
+			int contador = 0;
+			for (Serie serie : this.series_pendientes) {
+				if(s.getNombre_serie().equals(serie.getNombre_serie())) {
+					this.series_pendientes.remove(contador);
+					return true;
+				}
+				++contador;
 			}
-			++contador;
+			return false;
 		}
 		
-		return false;
+		
+	}
+	public Boolean quitarSerieEmpezada(Serie s) {
+		
+		if(this.series_empezadas.isEmpty()) {
+			System.out.println("no estoy en empezadas");
+			return false;
+		}else { 
+			int contador = 0;
+			for (SeriesVisualizada serie : this.series_empezadas) {
+				if(s.getNombre_serie().equals(serie.getSerie().getNombre_serie())) {
+					
+					this.series_empezadas.clear();//aqui esta la cuestión, parece que el remove no funciona, pero el clear,si (revisar mañana)
+					System.out.println(this.series_empezadas.size()+") me van a eliminar" + s.getNombre_serie());
+					return true;
+				}
+				++contador;
+			}
+			return false;
+		}	
 	}
 	
 	@Override

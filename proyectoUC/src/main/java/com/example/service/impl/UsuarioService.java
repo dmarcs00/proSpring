@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Serie;
 import com.example.entity.SeriesVisualizada;
+import com.example.entity.Temporada;
 import com.example.entity.Usuario;
 import com.example.repository.UsuarioRepository;
 import com.example.service.common.GenericServiceImpl;
@@ -53,11 +54,28 @@ public class UsuarioService extends GenericServiceImpl<Usuario, String> {
 				System.out.println("hola1"+s);
 				
 				if (s != null) {
-					SeriesVisualizada sv = new SeriesVisualizada(u,capitulos_vistos,s);
-					System.out.println("hola2");
-					u.setNuevaSerieEmpezada(sv);
-					System.out.println("hola3");
-					u.quitarSeriePendiente(s);
+					//comprobamos si la serie está finalizada o no para saber donde añadirla
+					if(esSerieFinalizada(s, capitulos_vistos)) {
+						//si no esta en series empezadas, entonces se quita de series pendientes(significa que se ha visto el ultimo capitulo
+						if(!u.quitarSerieEmpezada(s)) {
+							System.out.println("me van a quitar de pendientes");
+							u.quitarSeriePendiente(s);
+						}
+						System.out.println(u.getSeriesEmpezadas().size());
+						ArrayList<Serie> series_finalizadas = new ArrayList<>();
+						series_finalizadas.add(s);
+						u.setSeriesFinalizadas(series_finalizadas);
+						
+					}else {
+						SeriesVisualizada sv = new SeriesVisualizada(u,capitulos_vistos,s);
+						System.out.println("hola2");
+						u.setNuevaSerieEmpezada(sv);
+						System.out.println("hola3");
+						u.quitarSeriePendiente(s);
+						u.quitarSerieEmpezada(s);
+						
+					}
+					
 					result = u;
 				} else {
 					throw new NotFoundException();
@@ -68,12 +86,23 @@ public class UsuarioService extends GenericServiceImpl<Usuario, String> {
 			
 			em.getTransaction().commit();
 
-		} catch(Exception e) {
+		} catch(NotFoundException e) {
 			em.getTransaction().rollback();
 			throw e;
 		} 
 		System.out.println(result);
 		return result;
+	}
+	
+	private boolean esSerieFinalizada(Serie serie, int capitulos_vistos) {
+		int capitulos_serie = 0;
+		for (Temporada t : serie.getTemporadas()) {
+			capitulos_serie += t.getCapitulos().size();
+		}
+		if(capitulos_vistos == capitulos_serie) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

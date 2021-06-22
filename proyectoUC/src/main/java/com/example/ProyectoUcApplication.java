@@ -109,6 +109,7 @@ public class ProyectoUcApplication {
 	    	series_pendientes.add(s1);
 	    	usuario1.setSeriesFinalizadas(series_finalizadas);
 	    	usuario1.setSeriesPendientes(series_pendientes);
+	    	
 	    	Serie s3 = new Serie("Serie3", "Descripcion de la serie 3", new Categoria(0.75, "silver"));
 	    	
 	    	Temporada t31 = new Temporada(s3);
@@ -143,10 +144,12 @@ public class ProyectoUcApplication {
 	    	temporadas3.add(t32);
 	    	s3.setTemporada(temporadas3);
 	    	sr.save(s3);
+	    	
 	    	SeriesVisualizada sv1 = new SeriesVisualizada(usuario1, 5, s3);
 	    	
 	    	ArrayList<SeriesVisualizada> svs = new ArrayList<>();
-	    	svs.add(sv1);
+	    	//svs.add(sv1);
+	    	usuario1.setSeriesEmpezadas(svs);
 	    	
 	    	System.out.println(usuario1.getSeriesEmpezadas().size());
 	    	//Serie s2 = new Serie("Serie2", "Descripcion de la serie 2", null);
@@ -219,7 +222,7 @@ public class ProyectoUcApplication {
 	    	System.out.println(s1.toString());*/
 	    	/*ur.save(usuario1);
 	    	sr.save(s1);*/
-	    	ur.save(usuario1);
+	  
 	    	//Facturas
 	    	Factura f1 = new Factura("052021", usuario1);
 	    	ArrayList<CargoCapitulo> capitulos_vistos = new ArrayList<>();
@@ -257,7 +260,6 @@ public class ProyectoUcApplication {
 	    	facturas.add(f2);
 	    	usuario1.setFactura(facturas);
 	    	
-	    	usuario1.setSeriesEmpezadas(svs);
 	    	ur.save(usuario1);
 	    	//sr.save(s2);
 	    	//sr.save(s3);

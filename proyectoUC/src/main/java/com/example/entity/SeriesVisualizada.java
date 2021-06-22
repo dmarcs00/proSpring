@@ -16,9 +16,9 @@ public class SeriesVisualizada {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonView({DescripcionUsuario.class})
 	private Integer id;
 	@ManyToOne
-	@JsonIgnore
 	private Usuario usuario;
 	@JsonView({DescripcionUsuario.class})
 	private int ultimo_capitulo_visto;
@@ -34,14 +34,9 @@ public class SeriesVisualizada {
 		this.serie = serie;
 	}
 
-
-
 	protected SeriesVisualizada() {
 		
 	}
-
-
-
 	public Integer getId() {
 		return id;
 	}
