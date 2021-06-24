@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -36,10 +37,10 @@ public class Usuario {
 	@ManyToMany
 	@JsonView({DescripcionUsuario.class})
 	private List<Serie> series_finalizadas = new ArrayList<>();
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonView({DescripcionUsuario.class})
 	private List<SeriesVisualizada> series_empezadas = new ArrayList<>();
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonView({DescripcionUsuario.class})
 	private List<Factura> facturas = new ArrayList<>();
 	
@@ -87,9 +88,11 @@ public class Usuario {
 	
 	public void setSeriesEmpezadas(List<SeriesVisualizada> series_empezadas) {
 		this.series_empezadas = series_empezadas;
-	}
+	} 
 	public void setNuevaSerieEmpezada(SeriesVisualizada serie_empezada) {
 		int contador = 0;
+		this.facturas.clear();
+		System.out.println("limpiando facturas");
 		ArrayList<SeriesVisualizada> series_visualizadas = new ArrayList<>();
 		series_visualizadas.addAll(this.series_empezadas);
 		boolean existe = false;
@@ -158,22 +161,18 @@ public class Usuario {
 	}
 	public Boolean quitarSerieEmpezada(Serie s) {
 		
-		if(this.series_empezadas.isEmpty()) {
-			System.out.println("no estoy en empezadas");
-			return false;
-		}else { 
+		if(!this.series_empezadas.isEmpty()) {
+	
 			int contador = 0;
 			for (SeriesVisualizada serie : this.series_empezadas) {
 				if(s.getNombre_serie().equals(serie.getSerie().getNombre_serie())) {
-					
-					this.series_empezadas.clear();//aqui esta la cuestión, parece que el remove no funciona, pero el clear,si (revisar mañana)
+					this.series_empezadas.remove(contador);
 					System.out.println(this.series_empezadas.size()+") me van a eliminar" + s.getNombre_serie());
 					return true;
 				}
-				++contador;
 			}
-			return false;
 		}	
+		return false;
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class SeriesVisualizada {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonView({DescripcionUsuario.class})
 	private Integer id;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario usuario;
 	@JsonView({DescripcionUsuario.class})
 	private int ultimo_capitulo_visto;
@@ -45,7 +46,7 @@ public class SeriesVisualizada {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
+	} 
 
 
 
