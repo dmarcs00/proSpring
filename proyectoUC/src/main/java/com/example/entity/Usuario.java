@@ -70,7 +70,10 @@ public class Usuario {
     }
 	
 	public void setSeriesPendientes(List<Serie> series_pendientes) {
-		this.series_pendientes = series_pendientes;
+		this.series_pendientes.addAll(series_pendientes);
+	}
+	public void setSeriesPendientes(Serie serie) {
+		this.series_pendientes.add(serie);
 	}
 	
 	

@@ -147,7 +147,7 @@ public class ProyectoUcApplication {
 	    	
 	    	SeriesVisualizada sv1 = new SeriesVisualizada(usuario1, 5, s3);
 	    	
-	    	ArrayList<SeriesVisualizada> svs = new ArrayList<>();
+	    	ArrayList<SeriesVisualizada> svs = new ArrayList<>(); 
 	    	svs.add(sv1);
 	    	usuario1.setSeriesEmpezadas(svs);
 	    	

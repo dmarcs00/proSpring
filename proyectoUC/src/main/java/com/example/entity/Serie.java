@@ -113,18 +113,33 @@ public class Serie {
 	}
 
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Serie that = (Serie) o;
-        return numero_serie == that.numero_serie &&
-                Objects.equals(descripcion, that.descripcion);          
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Serie))
+			return false;
+		Serie other = (Serie) obj;
+		if (nombre_serie == null) {
+			if (other.nombre_serie != null)
+				return false;
+		} else if (!nombre_serie.equals(other.nombre_serie))
+			return false;
+		if (numero_serie == null) {
+			if (other.numero_serie != null)
+				return false;
+		} else if (!numero_serie.equals(other.numero_serie))
+			return false;
+		return true;
+	}
 
     @Override
-    public int hashCode() {
-        return Objects.hash(numero_serie, descripcion);
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nombre_serie == null) ? 0 : nombre_serie.hashCode());
+		result = prime * result + ((numero_serie == null) ? 0 : numero_serie.hashCode());
+		return result;
+	}
 
 	@Override
 	public String toString() {

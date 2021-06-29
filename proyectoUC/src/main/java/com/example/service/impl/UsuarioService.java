@@ -35,6 +35,9 @@ public class UsuarioService extends GenericServiceImpl<Usuario, String> {
 	public List<Usuario> findAll() {
 		return ur.findAll();
 	}
+	public Usuario save(Usuario u) {
+		return ur.save(u);
+	}
 	
 	public Usuario aniadirserieEmpezada(String user_id, Integer numero_serie, int capitulos_vistos) throws NotFoundException{
 		
@@ -71,9 +74,7 @@ public class UsuarioService extends GenericServiceImpl<Usuario, String> {
 						System.out.println("hola2");
 						u.setNuevaSerieEmpezada(sv);
 						System.out.println("hola3");
-						u.quitarSeriePendiente(s);
-						u.quitarSerieEmpezada(s);
-						
+						u.quitarSeriePendiente(s);						
 					}
 					
 					result = u;
@@ -109,6 +110,20 @@ public class UsuarioService extends GenericServiceImpl<Usuario, String> {
 	public UsuarioRepository getRepository() {
 		// TODO Auto-generated method stub
 		return ur;
+	}
+
+	public boolean existeSeriePendiente(Serie serie, Usuario u) {
+		// TODO Auto-generated method stub
+		ArrayList<Serie> series = new ArrayList<>();
+		series.addAll(u.getSeriesPendientes());
+		
+		for (Serie s : series) {
+			if(s.equals(serie)) {
+				return true;
+			}
+			
+		}
+		return false;
 	}
 
 }
