@@ -57,7 +57,7 @@
       name:'Factura',
       data: () => ({
         facturas: null,
-        model: 5,
+        model: 6,
         meses:['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         headers: [
             { text: 'Fecha', value: 'fecha' },
@@ -69,6 +69,7 @@
     }),
     mounted(){
         //Hay que leer el numero de factura para saber si en el mes actual hay que meter datos
+        this.model = this.modelMes;
         this.facturas = this.prop[0].facturas;
         this.facturas.forEach(element => {
             var mes = element.num_factura.split("");
@@ -80,13 +81,14 @@
     },
     watch:{
         model:function(){
-             this.facturasAux = [];
+            this.facturasAux = [];
             this.facturas.forEach(element => {
                 var mes = element.num_factura.split("");
                 if(parseInt(mes[1],10) == this.model+1){ //para enseñar solo las facturas del mes seleccionado    
                     this.facturasAux = element.capitulos_vistos_factura;
                 }
             })
+
         }
     },
     computed:{

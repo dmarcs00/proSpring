@@ -26,7 +26,7 @@
         </v-tabs>
       </template>
       </v-app-bar>
-      <router-view v-bind="myProps"></router-view>
+      <router-view v-bind="myProps" @llamarUsuario="llamarUsuario"></router-view>
     </v-main>
   </v-app>
 </template>

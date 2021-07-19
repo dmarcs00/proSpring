@@ -146,15 +146,18 @@
           }
         }
       },
-      verCapitulo: function(numero_capitulo){
+      verCapitulo:  function(numero_capitulo){
         //meter aqui el post para agregar la serie a la lista de empezadas. Se le pasará el id del capitulo y el id de la serie
         //primero hay que hacer un for o un calculo para actualizar la vista. Esto es por si se ve un capitulo más avanzado para que todos los anteriores queden vistos
         //tambien puede que se le pase el numero de capitulos visto, ya que este al estar calculado aqui, no es necesario calcularlo en el backend
         //primer paso prevenir si se pulsa un capitulo cualquiera que todos los anteriores queden vistos.
         this.capitulos_vistos = numero_capitulo - this.primerId + 1;
+        let self = this;
         this.axios.put("http://localhost:8080/api/usuarios/usr1/ver-capitulo-"+this.capitulos_vistos+"/"+this.serie.numero_serie, ).then((result) => {
           console.log(result);
+          self.$emit('llamarUsuario')
          });
+        
       }
     },
     mounted(){
