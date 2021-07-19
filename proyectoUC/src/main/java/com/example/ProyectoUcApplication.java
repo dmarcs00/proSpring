@@ -70,7 +70,12 @@ public class ProyectoUcApplication {
 	    	capitulos1.add(c12);
 	    	capitulos1.add(c13);
 	    	capitulos1.add(c14);
-	    	t1.setCapitulos(capitulos1);
+	    	//t1.setCapitulos(capitulos1);
+	    	t1.getCapitulos().add(c11);
+	    	t1.getCapitulos().add(c12);
+	    	t1.getCapitulos().add(c13);
+	    	t1.getCapitulos().add(c14);
+	 
 	    	ArrayList<Capitulo> capitulos2 = new ArrayList<>();
 	    	capitulos2.add(c1);;
 	    	capitulos2.add(c2);

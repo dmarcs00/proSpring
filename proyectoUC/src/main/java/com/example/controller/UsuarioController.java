@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.entity.Capitulo;
+import com.example.entity.Factura;
 import com.example.entity.Serie;
 import com.example.entity.Usuario;
 import com.example.service.impl.UsuarioService;
@@ -70,6 +72,8 @@ public class UsuarioController {
 		
 		ResponseEntity<Usuario> result = null;
 		Usuario u = us.aniadirserieEmpezada("usr1", numero_serie, capitulos_vistos);
+		//ahora añadimos el capitulo a la factura de este mes. Exista o no
+		Factura f = us.facturarCapitulo("usr1", numero_serie, capitulos_vistos);
 		if (u != null) {
 			System.out.println("respuesta buena"+u);
 			result = ResponseEntity.ok(u);

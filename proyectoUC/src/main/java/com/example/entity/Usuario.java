@@ -63,6 +63,10 @@ public class Usuario {
 	public void setFactura(List<Factura> facturas) {
 		this.facturas = facturas;
 	}
+	public void setNuevaFactura(Factura factura) {
+		System.out.println("Desde usuario -- "+this.facturas.size());
+		this.facturas.add(factura);
+	}
 	
 	
     public List<Serie> getSeriesPendientes() {
@@ -94,8 +98,6 @@ public class Usuario {
 	} 
 	public void setNuevaSerieEmpezada(SeriesVisualizada serie_empezada) {
 		int contador = 0;
-		this.facturas.clear();
-		System.out.println("limpiando facturas");
 		ArrayList<SeriesVisualizada> series_visualizadas = new ArrayList<>();
 		series_visualizadas.addAll(this.series_empezadas);
 		boolean existe = false;

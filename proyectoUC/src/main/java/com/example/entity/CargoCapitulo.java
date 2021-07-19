@@ -38,7 +38,21 @@ public class CargoCapitulo {
 		this.fecha = fecha;
 		this.factura = factura;
 		this.precio = capitulo.getTemporada().getSerie().getCategoria().getPrecio();
-		this.temporada_x_capitulo = capitulo.getTemporada().getNumero_temporada().toString() + "x" + capitulo.getNumero_capitulo().toString();
+		int num_cap = 0, num_temp = 0;
+		//Procedemos a obtener los valores del numero de la temporada y el numero del capitulo
+		//Esto es debido a que en a base de datos se van acumulando los ID del capitulo y temporada, no se segmentan
+		Serie serie = capitulo.getTemporada().getSerie();
+		for(int i=0;i<serie.getTemporadas().size();i++) {
+			for(int j=0; j<serie.getTemporadas().get(i).getCapitulos().size();j++) {
+				if(capitulo.getNumero_capitulo() == serie.getTemporadas().get(i).getCapitulos().get(j).getNumero_capitulo()) {
+					num_cap = j+1;
+					num_temp = i+1;
+				}
+			}
+		}
+		this.temporada_x_capitulo = num_temp + "x" + num_cap;
+		
+		
 		this.nombre_serie = capitulo.getTemporada().getSerie().getNombre_serie();
 
 	}

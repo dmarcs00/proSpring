@@ -22,7 +22,6 @@ public class Factura {
 	@JsonView({DescripcionUsuario.class})
 	private List<CargoCapitulo> capitulos_vistos_factura = new ArrayList<>();
 	@ManyToOne
-	@JsonIgnore
 	private Usuario usuario;
 	
 	public Factura(String num_factura, Usuario usuario) {
