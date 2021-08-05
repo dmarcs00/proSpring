@@ -153,10 +153,12 @@
         //primer paso prevenir si se pulsa un capitulo cualquiera que todos los anteriores queden vistos.
         this.capitulos_vistos = numero_capitulo - this.primerId + 1;
         let self = this;
-        this.axios.put("http://localhost:8080/api/usuarios/usr1/ver-capitulo-"+this.capitulos_vistos+"/"+this.serie.numero_serie, ).then((result) => {
+        this.axios.put("http://localhost:8080/api/usuarios/usr1/ver-capitulo-"+this.capitulos_vistos+"/"+this.serie.numero_serie, )
+        .then((result) => {
           console.log(result);
           self.$emit('llamarUsuario')
-         });
+         })
+         .catch(error => console.log(error));
         
       }
     },

@@ -90,7 +90,6 @@
           </v-card>
         </v-col>
       </v-row>
-      {{prop}}
     </v-container>
 </template>
 
