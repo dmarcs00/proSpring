@@ -22,7 +22,7 @@ public class SerieController {
 	@Autowired
 	SerieService ss;
 	
-	@GetMapping(value="/agregar-serie")
+	@GetMapping(value="/")
 	@JsonView(DescripcionSerie.class)
 	public ResponseEntity<List<Serie>> obtenerTodasSeries() {
 		
