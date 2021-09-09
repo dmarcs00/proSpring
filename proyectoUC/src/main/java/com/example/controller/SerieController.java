@@ -24,7 +24,7 @@ public class SerieController {
 	
 	@GetMapping(value="/agregar-serie")
 	@JsonView(DescripcionSerie.class)
-	public ResponseEntity<List<Serie>> obtenerTodosUsuarios() {
+	public ResponseEntity<List<Serie>> obtenerTodasSeries() {
 		
 		List<Serie> series = ss.findAll();
 		ResponseEntity<List<Serie>> result;
