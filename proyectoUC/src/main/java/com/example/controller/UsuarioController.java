@@ -83,46 +83,4 @@ public class UsuarioController {
 		
 		return result;
 	}
-	
-	@PostMapping(value = "/agregar-serie")
-	public ResponseEntity<Serie> reply(@RequestBody Map<String, Serie> payload) {
-		
-		String userId = "usr1"; // como siempre es el mismo usuario, entonces se lo paso directamente. Si llega a haber otro usuario hay que pasar otro parametro
-		 Serie serie = payload.get("serie");
-		 System.out.println("La serie: "+serie);
-		ResponseEntity<Serie> result = null;
-		Optional<Usuario> uo = us.findById(userId);
-		Usuario u = uo.get();
-		if (us.existeSeriePendiente(serie, u)) {
-			result = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-		} else {
-			u.setSeriesPendientes(serie);		
-			us.save(u);
-			result = ResponseEntity.ok(serie);
-		}
-		
-		return result;
-	   }
-	
-	/*@GetMapping(value="/{id}/facturas")  No HACE FALTA YA QUE LAS PODEMOS SACAR DE USUARIO
-	//@JsonView(Views.DescripcionUsuario.class)
-	public ResponseEntity<List<Factura>> obtenerFacturas(@PathVariable("id") String userId) {
-		
-		Optional<Usuario> u = us.findById(userId);
-		List<Factura> facturas = null;
-		ResponseEntity<List<Factura>> result;
-		
-		if (u.isPresent()) {
-			facturas = u.get().getFactura();
-			if (facturas != null) {
-				result = ResponseEntity.ok(facturas);	
-			} else { 
-				result = ResponseEntity.notFound().build();	
-			}
-		} else {
-			result = ResponseEntity.notFound().build();
-		}
-		
-		return result; 	
-	}*/
 }
